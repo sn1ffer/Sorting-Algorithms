@@ -1,43 +1,55 @@
 #include <iostream>
 using namespace std;
 
-void QuickSort(int *ar, int end) {
-    int start = 0;
-    int mid = ar[(end+1) / 2];
-    while (start <= end){
-        while(ar[start] < mid){
-            start++;
-        }
-        while(ar[end]> mid){
+void QuickSort(int *ar, int start, int end) {
+
+    int left = start;
+    int right = end;
+    int pivot = ar[start];
+
+    while (start < end) {
+
+        while ((ar[end] >= pivot)&&(start < end)) {
             end--;
         }
-        if (start <= end){
-            int tmp = ar[start];
+        if (start != end) {
             ar[start] = ar[end];
-            ar[end] = tmp;
+            start++;
+        }
+        while((ar[start]<=pivot)&&(start<end)){
+            start++;
+        }
+        if (start != end){
+            ar[end] = ar[start];
+            end--;
         }
     }
-    if(end > 0){
-        QuickSort(ar, start+1);
+    ar[start] = pivot;
+    pivot = start;
+    start = left;
+    end = right;
+    if(start < pivot){
+        QuickSort(ar, start, pivot-1);
     }
-    if(start < end){
-        QuickSort(&ar[start], end);
+    if(end > pivot){
+        QuickSort(ar, pivot+1, end);
     }
 }
 
 int main(){
+
     int count;
-    cout<<"Введите кол-во элементов массива: ";
+    cout<<"Enter the size of the array: ";
     cin >> count;
-    cout << "Введите элементы массива: ";
+    cout << "Enter the array elements: ";
     int arr[count];
     for (int i=0; i < count;i++) {
         cin >> arr[i];
     }
-    for(int i=0;i<count;i++)
-    {
-        cout<<arr[i]<<" ";
+    QuickSort(arr, 0, count-1);
+    cout << "Result: ";
+    for(int i=0;i<count;i++) {
+        cout << arr[i] << " ";
     }
-    QuickSort(arr, count-1);
 };
 
