@@ -1,12 +1,15 @@
 #include <stdio.h>
 
+//Функция построения max-heap - просеивание кучи 
+
 void siftDown(int *numbers, int root, int bottom){
     int maxChild;
     int done = 0;
+    // Условие пока не дошли до последнего ряда 
     while ((root * 2 <= bottom) && (!done)){
-        if (root * 2 == bottom)
-            maxChild = root * 2;
-        else if (numbers[root * 2] > numbers[root * 2 + 1])
+        if (root * 2 == bottom)  //условие нахождения в последнем ряду 
+            maxChild = root * 2; //левый ребенок 
+        else if (numbers[root * 2] > numbers[root * 2 + 1]) //запоминаем большего потомка 
             maxChild = root * 2;
         else
             maxChild = root * 2 + 1;
