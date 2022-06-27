@@ -4,14 +4,14 @@ void QuickSort(int *ar, int start, int end) {
 
     int left = start;
     int right = end;
-    int pivot = ar[start];
+    int pivot = ar[start]; //опорный элемент 
 
     while (start < end) {
 
         while ((ar[end] >= pivot)&&(start < end)) {
-            end--;
+            end--; //Сдвигаем правую границу, пока элемент с индексом end больше pivot
         }
-        if (start != end) {
+        if (start != end) {  //Если границы не сомкнулись 
             ar[start] = ar[end];
             start++;
         }
@@ -27,8 +27,8 @@ void QuickSort(int *ar, int start, int end) {
     pivot = start;
     start = left;
     end = right;
-    if(start < pivot){
-        QuickSort(ar, start, pivot-1);
+    if(start < pivot){ 
+        QuickSort(ar, start, pivot-1); //Рекурсивный вызов функции для левой и правой частей массива
     }
     if(end > pivot){
         QuickSort(ar, pivot+1, end);
